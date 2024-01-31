@@ -23,7 +23,7 @@ $lastUrl = end($url); // on récupère le dernier élément du tableau
 
 $map = [
     'accueil' => ['accueil', 'accueil', ''],
-    'catalogue' => ['', 'lire', ''],
+    'catalogue' => ['Catalogue', 'lire', ''],
     'addProduct' => ['Blog', 'addProduct', ''],
     'editProduct' => ['Blog', 'editProduct', $lastUrl],
     'deleteProduct' => ['Blog', 'deleteProduct', $lastUrl],
