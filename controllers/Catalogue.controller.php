@@ -1,23 +1,6 @@
 <?php
-class Product {
-    private $id;
-    private $name;
-    private $description;
-    private $price;
-    private $image;
-    private $category;
 
-    public function __construct($id, $name, $description, $price, $image, $category) {
-        $this->id = $id;
-        $this->name = $name;
-        $this->description = $description;
-        $this->price = $price;
-        $this->image = $image;
-        $this->category = $category;
-    }
-
-
-}
+require_once('models/Product.class.php');
 
 class CatalogueController {
     private $productManager;
@@ -26,7 +9,10 @@ class CatalogueController {
         $this->productManager = new ProductManager();
     }
 
- 
+    public function displayProducts() {
+        $products = $this->productManager->getProductsFromDb();
+        include('views/crud/product_list.view.php');
+    }
 
     public function create() {
         include('views/crud/product_create.view.php');
