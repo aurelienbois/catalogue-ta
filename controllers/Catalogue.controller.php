@@ -23,7 +23,7 @@ class ProductManager {
     
 }
 
-class BlogController {
+class CatalogueController {
     private $productManager;
 
     public function __construct() {

@@ -5,6 +5,12 @@ ini_set('display_errors', 1); // utile pour les développeurs
 ini_set('display_startup_errors', 1); // utile pour les développeurs
 error_reporting(E_ALL);
 
+$base = dirname($_SERVER['SCRIPT_NAME']);
+if (substr($base, -1) === '/') {
+    $base = substr($base, 0, -1);
+}
+define('BASE_URI', $base);
+
 $url = explode(
     '/', // séparateur
     filter_var( // nettoyage
@@ -17,7 +23,7 @@ $lastUrl = end($url); // on récupère le dernier élément du tableau
 
 $map = [
     'accueil' => ['accueil', 'accueil', ''],
-    'Blog' => ['Blog', 'lire', ''],
+    'catalogue' => ['', 'lire', ''],
     'addProduct' => ['Blog', 'addProduct', ''],
     'editProduct' => ['Blog', 'editProduct', $lastUrl],
     'deleteProduct' => ['Blog', 'deleteProduct', $lastUrl],
@@ -25,7 +31,7 @@ $map = [
 ];
 
 if (is_numeric($lastUrl)) {
-    $controller = 'Blog';
+    $controller = 'Catalogue';
     $action = 'lire';
     $id = $lastUrl;
 } elseif (isset($map[$lastUrl])) {
@@ -41,27 +47,27 @@ switch ($controller) {
     case 'accueil':
         require_once 'views/accueil.view.php';
         break;
-    case 'Blog':
-        require_once 'controllers/Blog.controller.php';
-        $BlogController = new BlogController();
+    case 'Catalogue':
+        require_once 'controllers/Catalogue.controller.php';
+        $CatalogueController = new CatalogueController();
         switch ($action) {
             case 'lire':
-                $BlogController->displayProducts();
+                $CatalogueController->displayProducts();
                 break;
             case 'addProduct':
-                $BlogController->create();
+                $CatalogueController->create();
                 break;
             case 'editProduct':
-                $BlogController->edit($id);
+                $CatalogueController->edit($id);
                 break;
             case 'deleteProduct':
-                $BlogController->delete($id);
+                $CatalogueController->delete($id);
                 break;
             case 'storeProduct':
-                $BlogController->store();
+                $CatalogueController->store();
                 break;
             case 'updateProduct':
-                $BlogController->update($id);
+                $CatalogueController->update($id);
                 break;
         }
         break;

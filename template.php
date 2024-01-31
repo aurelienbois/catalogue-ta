@@ -1,10 +1,22 @@
-<!DOCTYPE html>
+<?php
+$listeLiens = [
+  'Accueil' => '/accueil',
+  'Catalogue' => '/catalogue',
+];
+
+// ajouter la BASE_URI au début de chaque lien
+$listeLiens = array_map(function($lien) {
+  return BASE_URI . $lien;
+}, $listeLiens);
+
+?><!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $title ?></title>
     <link rel="stylesheet" href="https://bootswatch.com/5/flatly/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= BASE_URI ?>/public/styles.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
@@ -15,18 +27,33 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="nav-link active" href="./">Accueil
-            <span class="visually-hidden">(actif)</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="./blog">Blog</a>
-        </li>
+        <?php
+        foreach ($listeLiens as $titre => $lien) {
+        ?>
+          <li class="nav-item">
+            <a
+              class="nav-link<?php
+                // strtolower() permet de mettre en minuscules
+                // ça permet de comparer par ex. Accueil avec accueil
+                if (strtolower($titre) === @$_GET['action'] ) {
+                  echo ' active'; // l'espace avant active est important
+                  // car il y a un espace entre les classes
+                  // sinon ça ferait class="nav-linkactive"
+                }
+              ?>"
+              href="<?= $lien ?>"
+            >
+              <?= $titre ?>
+              <span class="visually-hidden">(actif)</span>
+            </a>
+          </li>
+        <?php
+        }
+        ?>
       </ul>
       <form class="d-flex">
         <input class="form-control me-sm-2" type="search" placeholder="Search">
-        <button class= "     btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
       </form>
     </div>
   </div>
