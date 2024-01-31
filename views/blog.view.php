@@ -22,4 +22,4 @@ ob_start();
 </div>
 <?php
 $content = ob_get_clean();
-require_once 'template.php';
+require_once ('views/template.view.php');
