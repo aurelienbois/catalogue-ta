@@ -1,6 +1,8 @@
 <?php
 
 require_once('models/Product.class.php');
+require_once('models/ProductManager.class.php');
+
 
 class CatalogueController {
     private $productManager;
