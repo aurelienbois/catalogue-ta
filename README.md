@@ -1,10 +1,8 @@
-# PHP Blog Project
+# PHP Product List Project
 
 This project is intended for second-year Bachelor students. It serves as an introduction to Object-Oriented Programming (OOP) using PHP.
 
 ## Description
-
-The project involves a simple blog where users can read articles. Each article is represented by a card that contains the title, author, image, and content of the article. Users also have the option to edit or delete articles.
 
 ## Installation
 
