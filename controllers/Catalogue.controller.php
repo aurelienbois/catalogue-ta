@@ -19,10 +19,6 @@ class Product {
 
 }
 
-class ProductManager {
-    
-}
-
 class CatalogueController {
     private $productManager;
 
@@ -30,10 +26,7 @@ class CatalogueController {
         $this->productManager = new ProductManager();
     }
 
-    public function displayProducts() {
-        $products = $this->productManager->getProductsFromDb();
-        require_once('views/blog.view.php');
-    }
+ 
 
     public function create() {
         include('views/crud/product_create.view.php');
